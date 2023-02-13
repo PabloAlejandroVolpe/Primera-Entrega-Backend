@@ -1,0 +1,14 @@
+{
+  "name": "entregaback",
+  "version": "1.0.0",
+  "description": "Primera Entrega Proyecto final backend coder-house",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Volpe Pablo",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
