@@ -1,0 +1,13 @@
+[
+    { "id": 1, "title": "product 1", "price": 100, "code": "P1", "description": "description of product 1", "stock": 12, "category": "ropas", "thumbnails":"image1.jpg", "status": true},
+  
+    { "id": 2, "title": "product 2", "price": 200, "code": "P2", "description": "description of product 2", "stock": 21, "category": "ropas", "thumbnails":"image2.jpg", "status": true},
+  
+    { "id": 3, "title": "product 3", "price": 300, "code": "P3", "description": "description of product 3", "stock": 5, "category": "ropas", "thumbnails":"image3.jpg", "status": true},
+  
+    { "id": 4, "title": "product 4", "price": 400, "code": "P4", "description": "description of product 4", "stock": 11, "category": "ropas", "thumbnails":"image4.jpg", "status": true},
+  
+    { "id": 5, "title": "product 5", "price": 500, "code": "P5", "description": "description of product 5", "stock": 50, "category": "ropas", "thumbnails":"image5.jpg", "status": true},
+  
+    { "id": 6, "title": "product 6", "price": 600, "ode": "P6", "description": "description of product 6", "stock": 16, "category": "ropas", "thumbnails":"image6.jpg", "status": true}
+]

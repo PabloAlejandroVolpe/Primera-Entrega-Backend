@@ -3,25 +3,12 @@ const app = express();
 const port = 8080;
 
 // Array de productos
-const products = [
-  { id: 1, title: 'product 1', price: 100, code: "P1", description: "description of product 1", stock: 12, category: "ropas", thumbnails:"image1.jpg", status: true},
 
-  { id: 2, title: 'product 2', price: 200, code: "P2", description: "description of product 2", stock: 21, category: "ropas", thumbnails:"image2.jpg", status: true},
-
-  { id: 3, title: 'product 3', price: 300, code: "P3", description: "description of product 3", stock: 5, category: "ropas", thumbnails:"image3.jpg", status: true},
-
-  { id: 4, title: 'product 4', price: 400, code: "P4", description: "description of product 4", stock: 11, category: "ropas", thumbnails:"image4.jpg", status: true},
-
-  { id: 5, title: 'product 5', price: 500, code: "P5", description: "description of product 5", stock: 50, category: "ropas", thumbnails:"image5.jpg", status: true},
-
-  { id: 6, title: 'product 6', price: 600, code: "P6", description: "description of product 6", stock: 16, category: "ropas", thumbnails:"image6.jpg", status: true}
-];
+const products = require('./utilities/products.json');
 
 // Array de carros de compra
-const carts = [
-  { id: 1, products: [1, 2], total: 300 },
-  { id: 2, products: [3], total: 300 }
-];
+
+const carts = require('./utilities/carts.json')
 
 // Ruta para obtener todos los productos
 app.get('/products', (req, res) => {
@@ -49,4 +36,56 @@ app.get('/carts/:id', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
+});
+
+
+// Ruta DELETE para eliminar un producto por ID
+app.delete('/products/:id', (req, res) => {
+  const { id } = req.params;
+  
+  // Buscar el índice del producto en el array por ID
+  const index = products.findIndex(product => product.id === id);
+  
+  if (index !== -1) {
+    // Eliminar el producto del array
+    products.splice(index, 1);
+    res.send(`Producto con ID ${id} eliminado.`);
+  } else {
+    res.status(404).send(`Producto con ID ${id} no encontrado.`);
+  }
+});
+
+
+// Ruta PUT para actualizar un producto por ID
+app.put('/products/:id', (req, res) => {
+  const { id } = req.params;
+  const { title, price } = req.body;
+  
+  // Buscar el índice del producto en el array por ID
+  const index = products.findIndex(product => product.id === id);
+  
+  if (index !== -1) {
+    // Actualizar el producto en el array
+    products[index] = { id, title, price };
+    res.send(`Producto con ID ${id} actualizado.`);
+  } else {
+    res.status(404).send(`Producto con ID ${id} no encontrado.`);
+  }
+});
+
+
+// Ruta POST para crear un nuevo producto
+app.post('/products', (req, res) => {
+  const { title, price } = req.body;
+  
+  // Generar un nuevo ID para el producto
+  const id = products.length > 0 ? products[products.length - 1].id + 1 : 1;
+  
+  // Crear el objeto del nuevo producto
+  const newProduct = { id, title, price };
+  
+  // Agregar el nuevo producto al array
+  products.push(newProduct);
+  
+  res.send(`Producto con ID ${id} creado.`);
 });
